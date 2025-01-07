@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UsersService} from './services/users.service';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,22 @@ import { Component } from '@angular/core';
   standalone: false,
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'projeto-cadastro-usuarios';
+export class AppComponent implements OnInit {
+
+  usersList: any = [];
+
+  constructor(private readonly _usersService: UsersService) {
+  }
+
+  ngOnInit(): void {
+    this.getUsers();
+  }
+
+  private getUsers() {
+    this._usersService.getUsers().subscribe((usersListResponse) => {
+      this.usersList = usersListResponse;
+      console.log(usersListResponse);
+    });
+  }
+
 }
