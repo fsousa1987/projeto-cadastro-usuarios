@@ -37,6 +37,7 @@ export class GenresService {
         observer.complete();
       }, 3000)
     });
+    // return of(this.genresList);
   }
 
 }
