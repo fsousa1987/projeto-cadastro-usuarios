@@ -20,7 +20,6 @@ export class UserFormComponent implements OnChanges {
   @Input() userSelected: IUser = {} as IUser;
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges');
     const USER_CHANGED = changes['userSelected'];
 
     if (USER_CHANGED) {

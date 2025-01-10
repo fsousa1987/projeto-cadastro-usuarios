@@ -73,7 +73,14 @@
             *ngIf="passwordControl.hasError('invalidPasswordStrength') && !passwordControl.hasError('required')">
             Digite uma senha <strong>mais forte</strong>.
           </mat-error>
-          <mat-progress-bar [value]="passwordStrengthValue"></mat-progress-bar>
+          <mat-progress-bar
+            [value]="passwordStrengthValue"
+            [ngClass]="{
+              'weak-password': passwordStrengthValue === 0 || passwordStrengthValue === 30,
+              'medium-password': passwordStrengthValue === 60,
+              'strong-password': passwordStrengthValue === 100
+            }"
+          ></mat-progress-bar>
         </mat-form-field>
       </div>
     </form>
