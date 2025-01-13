@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {ComponentsModule} from './components/components.module';
 import {provideHttpClient} from '@angular/common/http';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
 
 
 @NgModule({
@@ -19,7 +20,11 @@ import {provideHttpClient} from '@angular/common/http';
   ],
   providers: [
     provideAnimationsAsync(),
-    provideHttpClient()
+    provideHttpClient(),
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: 'pt-BR'
+    },
   ],
   bootstrap: [AppComponent]
 })
