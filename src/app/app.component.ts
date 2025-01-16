@@ -52,7 +52,11 @@ export class AppComponent implements OnInit {
   }
 
   onFormSubmit() {
-    this.openBeforeAndAfterDialog();
+    if (this.userSelectedIndex === undefined) return;
+
+    const originalUser = this.usersList[this.userSelectedIndex];
+
+    this.openBeforeAndAfterDialog(originalUser, this.userSelected);
   }
 
   private getUsers() {
@@ -73,8 +77,12 @@ export class AppComponent implements OnInit {
     });
   }
 
-  private openBeforeAndAfterDialog() {
+  private openBeforeAndAfterDialog(originalUser: IUser, updatedUser: IUser) {
     this._matDialog.open(UserBeforeAndAfterDialogComponent, {
+      data: {
+        originalUser,
+        updatedUser
+      },
       minWidth: '70%',
     });
   }
