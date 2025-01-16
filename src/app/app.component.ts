@@ -6,6 +6,10 @@ import {UsersListResponse} from './types/users-list-response';
 import {GenresListResponse} from './types/genres-list-response';
 import {StatesListResponse} from './types/states-list-response';
 import {IUser} from './interfaces/user/user.interface';
+import {MatDialog} from '@angular/material/dialog';
+import {
+  UserBeforeAndAfterDialogComponent
+} from './components/user-before-and-after-dialog/user-before-and-after-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +28,8 @@ export class AppComponent implements OnInit {
 
   constructor(private readonly _usersService: UsersService,
               private readonly _genresService: GenresService,
-              private readonly _brazilianStatesService: BrazilianStatesService) {
+              private readonly _brazilianStatesService: BrazilianStatesService,
+              private readonly _matDialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -46,6 +51,10 @@ export class AppComponent implements OnInit {
     console.log(this.usersList);
   }
 
+  onFormSubmit() {
+    this.openBeforeAndAfterDialog();
+  }
+
   private getUsers() {
     this._usersService.getUsers().subscribe((usersListResponse) => {
       this.usersList = usersListResponse;
@@ -61,6 +70,12 @@ export class AppComponent implements OnInit {
   private getStates() {
     this._brazilianStatesService.getStates().subscribe((statesListResponse) => {
       this.statesList = statesListResponse;
+    });
+  }
+
+  private openBeforeAndAfterDialog() {
+    this._matDialog.open(UserBeforeAndAfterDialogComponent, {
+      minWidth: '70%',
     });
   }
 
